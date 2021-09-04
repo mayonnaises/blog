@@ -1,0 +1,60 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block link %}
+<style type="text/css">
+    #blog_list_page {
+        padding: 15px 20px;
+    }
+    .blog-block {
+        padding: 15px 10px;
+    }
+    .blog-title {
+        font-size: 1.75rem;
+        color: #333;
+        text-decoration: none;
+    }
+    .blog-title:hover {
+        text-decoration: underline solid #333;
+    }
+    #tag_heading {
+        display: inline-block;
+        margin-top: 5px;
+        font-size: 0.9rem;
+        color: #777;
+    }
+    .blog-tags {
+        display: inline-block;
+        font-size: 0.9rem;
+        color: #009bc3;
+    }
+    .blog-tags:hover {
+        text-decoration: underline solid #009bc3;
+    }
+    .blog-desc {
+        margin-top: 5px;
+        font-size: 0.9rem;
+        color: #777;
+        line-height: 27px;
+    }
+    .blog-icon {
+        width: 90%;
+    }
+</style>
+{% endblock %}
+{% block content %}
+    <div id="blog_list_page">
+        {% for blog in blog_list %}
+        <div class="blog-block">
+            <a href="" class="blog-title">{{ blog.title }}</a>
+            <div id="tag_wrapper">
+                <p id="tag_heading">Tag：</p>
+                {% for tag in blog.tags.all %}
+                <p class="blog-tags">{{ tag.name }}</p>
+                {% endfor %}
+            </div>
+            <p class="blog-desc">{{ blog.description }}</p>
+            <!-- <img src="{{ blog.icon.url }}" class="blog-icon"> -->
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
