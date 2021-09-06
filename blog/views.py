@@ -20,3 +20,15 @@ class BlogListView(ListView):
     def get_context_data(self):
         context = super().get_context_data()
         return context
+
+
+class BlogDetailView(TemplateView):
+    template_name = 'blog/blog_detail.html'
+
+    def get_context_data(self, pk):
+        context = super().get_context_data()
+        blog = Blog.objects.get(pk=pk)
+        context.update({
+            'blog': blog
+        })
+        return context

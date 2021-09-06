@@ -42,19 +42,19 @@
 </style>
 {% endblock %}
 {% block content %}
-    <div id="blog_list_page">
-        {% for blog in blog_list %}
-        <div class="blog-block">
-            <a href="" class="blog-title">{{ blog.title }}</a>
-            <div id="tag_wrapper">
-                <p id="tag_heading">Tag：</p>
-                {% for tag in blog.tags.all %}
-                <p class="blog-tags">{{ tag.name }}</p>
-                {% endfor %}
-            </div>
-            <p class="blog-desc">{{ blog.description }}</p>
-            <!-- <img src="{{ blog.icon.url }}" class="blog-icon"> -->
+<div id="blog_list_page">
+    {% for blog in blog_list %}
+    <div class="blog-block">
+        <a href="{% url 'blog:blog_detail' pk=blog.pk %}" class="blog-title">{{ blog.title }}</a>
+        <div id="tag_wrapper">
+            <p id="tag_heading">Tag：</p>
+            {% for tag in blog.tags.all %}
+            <p class="blog-tags">{{ tag.name }}</p>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <p class="blog-desc">{{ blog.description }}</p>
+        <!-- <img src="{{ blog.icon.url }}" class="blog-icon"> -->
     </div>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -14,7 +14,6 @@
         }
         #home_header {
             padding: 20px 30px 15px;
-            /*background: #307bcf;*/
             background: linear-gradient(to bottom, #01B2D3, #0077AF)
         }
         #header_logo {
@@ -22,20 +21,21 @@
             color: #fff;
         }
         #header_tag_grid {
-            display: grid;
+            /*display: grid;
             max-width: 400px;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));*/
             margin: 10px 0 0;
         }
         .home-header-tags {
+            display: inline-block;
             text-decoration: none;
             font-size: 1.05rem;
             color: #fff;
         }
         .tag-line {
             font-size: 1.1rem;
-            color: #fff;
-            margin: 0 10px;
+            color: rgba(255, 255, 255, 0.15);
+            margin: 0 15px;
         }
         .home-header-tags:hover {
             text-decoration: underline solid #fff;
@@ -48,15 +48,11 @@
         <div id="home_header">
             <p id="header_logo">Dorian Gray</p>
             <div id="header_tag_grid">
-                <div>
-                    <a href="/" class="home-header-tags">Home</a>
-                </div>
-                <div>
-                    <a href="{% url 'blog:blog_list' %}" class="home-header-tags">Blog</a>
-                </div>
-                <div>
-                    <a href="" class="home-header-tags">Projects</a>
-                </div>
+                <a href="/" class="home-header-tags">Home</a>
+                <span class="tag-line">|</span>
+                <a href="{% url 'blog:blog_list' %}" class="home-header-tags">Blog</a>
+                <span class="tag-line">|</span>
+                <a href="" class="home-header-tags">Projects</a>
             </div>
         </div>
         {% block content %}{% endblock %}
