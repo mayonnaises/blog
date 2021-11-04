@@ -13,3 +13,4 @@ info/
 objects/
 refs/
 .DS_Store
+.mypy_cache

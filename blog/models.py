@@ -14,14 +14,29 @@ class Tag(models.Model):
     name = models.CharField(
         max_length=50
     )
-    description = models.TextField(
-        'タグの説明',
-        blank=True,
-        null=True
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'blog_tag'
+
+
+class Group(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    name = models.CharField(
+        max_length=50
     )
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        db_table = 'blog_group'
 
 
 class Blog(models.Model):
@@ -34,19 +49,27 @@ class Blog(models.Model):
     icon = models.ImageField(
         upload_to='blog_icon/',
         blank=True,
-        null=True
+        null=True,
+        verbose_name='main_image',
     )
     content = models.TextField()
     description = models.TextField(
-        '記事の説明',
+        'article description',
         blank=True
     )
     tags = models.ManyToManyField(
         Tag,
         blank=True
     )
-    is_public = models.BooleanField(
-        '公開ステータス',
+    group = models.ForeignKey(
+        Group,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='group_of'
+    )
+    is_published = models.BooleanField(
+        'public status',
         default=True
     )
     created_at = models.DateTimeField(
@@ -55,3 +78,6 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        db_table = 'blog_blog'

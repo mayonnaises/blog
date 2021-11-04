@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <title>{% block title %}{% endblock %}</title>
+    <style type="text/css">
+        * {
+            font-size: 10px;
+            margin: 0;padding: 0;
+            border: 0;
+            background-repeat: repeat-y;
+            font-family: "Open Sans", "Noto Sans", "PT Sans", Helvetica, Arial, sans-serif;
+        }
+        .link {
+            position: absolute;top: 0;left:0;
+            height: 100%;width: 100%;
+            list-style: none;z-index: 9;
+        }
+        .clear { clear: both; }
+        .block { display: block; }
+        .none { display: none; }
+        #home_header {
+            padding: 20px 30px 15px;
+            /* background: linear-gradient(to bottom, #01B2D3, #0077AF) */
+            border-bottom: 1px solid #ccc;
+        }
+        #header_logo {
+            display: inline-block;
+            font-size: 3.3rem;
+            color: #333;
+        }
+        #header_tag_grid {
+            /*display: grid;
+            max-width: 400px;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));*/
+            float: right;
+            margin: 10px 0 0;
+        }
+        .home-header-tags {
+            display: inline-block;
+            padding: 0 0 8px;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.85rem;
+            color: #333;
+        }
+        .home-header-tags:hover {
+            border-bottom: 1px solid #aaa;
+        }
+        .active-tag {
+            border-bottom: 1px solid #aaa;
+        }
+    </style>
+    {% block link %}{% endblock %}
+</head>
+<body>
+    <div id="page_wrapper">
+        <div id="home_header">
+            <p id="header_logo">BASIL</p>
+            <div id="header_tag_grid">
+                <a
+                    href="/"
+                    class="
+                        home-header-tags
+                        {% if request.path == '/' %}
+                        active-tag
+                        {% endif %}
+                    "
+                >
+                    Home
+                </a>
+                <a
+                    href="{% url 'blog:blog_list' %}"
+                    class="
+                        home-header-tags
+                        {% if '/blog/' in request.path %}
+                        active-tag
+                        {% endif %}
+                    "
+                >
+                    Blog
+                </a>
+                <a href="" class="home-header-tags">Projects</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+    {% block script %}{% endblock %}
+</body>
+</html>

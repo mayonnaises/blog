@@ -1,9 +1,28 @@
-{% extends "home/base.html" %}
+{% extends "general/base.html" %}
 {% load static %}
 {% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/blog_detail.css' %}">
 {% endblock %}
 {% block content %}
 <div id="blog_content_page">
-    <h1 id="blog_title">{{ blog.title }}</h1>
+    <div id="inner_blog_content_page">
+        <h1 id="blog_title">{{ blog.title }}</h1>
+        <div id="tag_block">
+            <p id="tag_heading">Tag : </p>
+            {% for tag in blog.tags.all %}
+                <a
+                    class="blog-tags"
+                    href="{% url 'blog:blogs_filtered_by_tag' tag_pk=tag.pk %}"
+                >{{ tag.name }}</a>
+                {% if not forloop.last %}
+                    <p class="tag-comma">,</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <img src="{{ blog.icon.url }}" id="blog_icon" />
+        <div id="content_block">
+            {{ blog.content | safe }}
+        </div>
+    </div>
 </div>
 {% endblock %}

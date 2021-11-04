@@ -1,9 +1,20 @@
 {% extends "general/base.html" %}
 {% load static %}
 {% block link %}
-<style type="text/css">
-    #blog_list_page {
-        padding: 15px 20px;
+<style>
+    #blogs_filtered_by_tag {
+        padding: 0 20px 15px;
+    }
+    #tag_to_filter {
+        text-align: center;
+    }
+    #tag_name_display {
+        display: inline-block;
+        padding: 4px 16px;
+        font-size: 1.55rem;
+        color: #333;
+        background-color: #ececec;
+        border-radius: 15px;
     }
     .blog-block {
         padding: 15px 10px;
@@ -47,8 +58,11 @@
     }
 </style>
 {% endblock %}
-{% block content %}
-<div id="blog_list_page">
+{% block content %}　
+<div id="blogs_filtered_by_tag">
+    <div id="tag_to_filter">
+        <p id="tag_name_display">Tag to filter : {{ tag.name }}</p>
+    </div>
     {% for blog in blog_list %}
     <div class="blog-block">
         <a href="{% url 'blog:blog_detail' pk=blog.pk %}" class="blog-title">{{ blog.title }}</a>
@@ -65,7 +79,6 @@
             {% endfor %}
         </div>
         <p class="blog-desc">{{ blog.description }}</p>
-        <!-- <img src="{{ blog.icon.url }}" class="blog-icon"> -->
     </div>
     {% endfor %}
 </div>
